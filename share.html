@@ -47,7 +47,7 @@
 					<img id="img" src="https://gd3.alicdn.com/imgextra/i3/2638827950/O1CN01sbtwTZ28b9EJKjgJD_!!2638827950.jpg" class="share_img"/>
 					<div class="share_inner">
 						<div class="share_title">
-							<img src="https://gd3.alicdn.com/imgextra/i3/2638827950/O1CN01sbtwTZ28b9EJKjgJD_!!2638827950.jpg"/>你好你好你好好你你好你好你好好你你好你好你好好你你好你好你好好你你好你好你好好你你好你好你好好你
+							你好你好你好好你你好你好你好好你你好你好你好好你你好你好你好好你你好你好你好好你你好你好你好好你
 						</div>
 						<div class="share_sell">
 							<div class="share_sell_num">销量：9498</div>
@@ -76,8 +76,7 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="js/qrcode.js"></script>
-		<script src="./js/dom-to-image.js"></script>
-		<!--<script src="js/html2canvas.js"></script>-->
+		<script src="./dom-to-image.js"></script>
 		<script>
 			var code = document.getElementById("code");
 			var qrcode = new QRCode(code, {
@@ -97,41 +96,35 @@
 //		        console.error('oops, something went wrong!', error);
 //		    });
 		    
-//		   function convertImgToBase64(url, callback, outputFormat) {
-//	            var canvas = document.createElement('CANVAS'),
-//	                ctx = canvas.getContext('2d'),
-//	                img = new Image;
-//		            img.crossOrigin = 'Anonymous';
-//		            img.onload = function() {
-//	                canvas.height = img.height;
-//	                canvas.width = img.width;
-//	                ctx.drawImage(img, 0, 0);
-//	                var dataURL = canvas.toDataURL(outputFormat || 'image/png');
-//	                callback.call(this, dataURL);
-//	                canvas = null;
-//	            };
-//	            img.src = url;
-//     		}
-//			convertImgToBase64('https://gd3.alicdn.com/imgextra/i3/2638827950/O1CN01sbtwTZ28b9EJKjgJD_!!2638827950.jpg', function(base64Img) {
-////	            $("#code_img").attr('src', base64Img);
-//				document.getElementById("img").src = base64Img
-//	            html2canvas(document.body, {
-//	                useCORS: true,
-//	                allowTaint: true
-//	            }).then(function(canvas) {
-//	                var ImgUrl = canvas.toDataURL();
-//	            })
-//	        });
+		   function convertImgToBase64(url, callback, outputFormat) {
+	            var canvas = document.createElement('CANVAS'),
+	                ctx = canvas.getContext('2d'),
+	                img = new Image;
+		            img.crossOrigin = 'Anonymous';
+		            img.onload = function() {
+	                canvas.height = img.height;
+	                canvas.width = img.width;
+	                ctx.drawImage(img, 0, 0);
+	                var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+	                callback.call(this, dataURL);
+	                canvas = null;
+	            };
+	            img.src = url;
+       		}
+			convertImgToBase64('https://gd3.alicdn.com/imgextra/i3/2638827950/O1CN01sbtwTZ28b9EJKjgJD_!!2638827950.jpg', function(base64Img) {
+//	            $("#code_img").attr('src', base64Img);
+				document.getElementById("img").src = base64Img
+				domtoimage.toPng(document.getElementById("dom")).then(function (dataUrl) {
+			        var img = new Image();
+			        img.src = dataUrl;
+			        document.body.appendChild(img);
+			    })
+			    .catch(function (error) {
+			        console.error('oops, something went wrong!', error);
+			    });
+	        });
 			
-			domtoimage.toPng(document.body).then(function (dataUrl) {
-//				    	console.log(dataUrl)
-				        var img = new Image();
-				        img.src = dataUrl;
-				        document.body.appendChild(img);
-				    })
-				    .catch(function (error) {
-				        console.error('oops, something went wrong!', error);
-				    });
+			
 //			 html2canvas(document.body).then(function(canvas) {
 ////		    	图片资源canvas.toDataURL()
 ////				console.log(canvas.toDataURL())
